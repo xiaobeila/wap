@@ -1,23 +1,25 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <router-view></router-view>
+    <v-loading v-show="fetchLoading"></v-loading>
   </div>
 </template>
 
 <script>
+import Loading from '@/common/_loading'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    'v-loading': Loading
+  },
+  computed: {
+    fetchLoading () {
+      return this.$store.state.fetchLoading
+    }
+  }
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="less">
+@import "./assets/css/reset.css";
 </style>

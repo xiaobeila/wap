@@ -1,16 +1,33 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import HelloWorld from '@/components/HelloWorld'
-const Index = resolve => require(['@/view/Index'], resolve)
 
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'Index',
-      component: Index
-    }
+  mode: 'history',
+  linkActiveClass: 'menue-active',
+  scrollBehavior: () => ({
+    y: 0
+  }),
+  routes: [{
+    path: '/',
+    name: '首页',
+    component: () => import('@/view/Index/index')
+  },
+  {
+    path: '/category',
+    name: '分类页',
+    component: () => import('@/view/category/index')
+  },
+  {
+    path: '/car',
+    name: '购物车页',
+    component: () => import('@/view/car/index')
+  },
+  {
+    path: '/user',
+    name: '用户页',
+    component: () => import('@/view/user/index')
+  }
   ]
 })
