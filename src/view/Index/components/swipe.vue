@@ -1,24 +1,14 @@
 <template>
   <div class="mint-swipe">
     <mt-swipe :auto="4000">
-      <mt-swipe-item>
-        <img
-          src="https://via.placeholder.com/300"
-          alt="1"
-        />
-      </mt-swipe-item>
-      <mt-swipe-item>
-        <img
-          src="https://via.placeholder.com/300"
-          alt="2"
-        />
-      </mt-swipe-item>
-      <mt-swipe-item>
-        <img
-          src="https://via.placeholder.com/300"
-          alt="3"
-        />
-      </mt-swipe-item>
+      <template v-for="(item,index) in data">
+        <mt-swipe-item :key="index"
+                       v-if="item.is_show !==1">
+          <router-link :to="'http://www.kuangjiahu.top/public/static/image/'+item.img">
+            <img :src="'http://www.kuangjiahu.top/public/static/image/'+item.img">
+          </router-link>
+        </mt-swipe-item>
+      </template>
     </mt-swipe>
   </div>
 </template>
@@ -29,7 +19,18 @@ import { Swipe, SwipeItem } from 'mint-ui'
 Vue.component(Swipe.name, Swipe)
 Vue.component(SwipeItem.name, SwipeItem)
 export default {
+  name: 'swipe',
+  props: {
+    data: {
+      type: Array,
+      required: true
+    }
+  },
+  data () {
+    return {
 
+    }
+  }
 }
 </script>
 
@@ -37,5 +38,9 @@ export default {
 .mint-swipe {
   height: 200px;
   text-align: center;
+  img {
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>
